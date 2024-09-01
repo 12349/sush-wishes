@@ -10,11 +10,11 @@ const LoveLetter = () => {
 
   // Define the messages to be displayed
   const messages = [
-    "Heyy Assalamualikum ! Keep Clikin to read the Next Message.",
-    "You Asked Me a Greeting Card I've Created a Greeting App 😉:)",
-    "Sending you Loads of Love & Luck on your Birthday Antara 💃:)",
+    "Heyy Chinmay ! Keep Clikin to read the Next Message.",
+    "🎉 Puttinarōju subhakāṅkṣalu, Susmitha!😉:)",
+    "Sending you Loads of Love & Luck on your Birthday chinmay 💃:)",
     "And i Wish you Many More Happy Returns of the Dayyy🥳🎁🎊",
-    "Enjoy Your Day and Be Prepared to Give Me Daawat😅 See You!"
+    "Enjoy Your Day and i always look forward to see at the top 😅 See You!"
   ];
 
   const totalMessages = messages.length;
