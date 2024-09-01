@@ -1,12 +1,11 @@
 import React, { useState, useRef } from 'react';
 import Confetti from 'react-confetti';
 import './LoveLetter.css';
-import audioFile from './kushi.mp3'; // Replace with appropriate wedding music
+import audioFile from './kushi.mp3'; // Updated to kushi.mp3
 
 const LoveLetter = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isFullSize, setIsFullSize] = useState(false);
-  const [messageIndex, setMessageIndex] = useState(0);
+  const [pageIndex, setPageIndex] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
   const [isTurningPage, setIsTurningPage] = useState(false);
   const audioRef = useRef(null);
@@ -22,26 +21,24 @@ const LoveLetter = () => {
 
   const totalMessages = messages.length;
 
-  const handleOpenLetter = () => {
+  const handleOpenBook = () => {
     if (!isOpen) {
       setIsOpen(true);
       setTimeout(() => {
-        setIsFullSize(true);
         if (audioRef.current) {
           audioRef.current.play()
             .then(() => console.log("Playback succeeded"))
             .catch(e => console.error("Playback failed:", e));
         }
       }, 800);
-    } else if (messageIndex < totalMessages - 1) {
+    } else if (pageIndex < totalMessages - 1) {
       setIsTurningPage(true);
       setTimeout(() => {
-        setMessageIndex(prevIndex => prevIndex + 1);
+        setPageIndex(prevIndex => prevIndex + 1);
         setIsTurningPage(false);
         triggerConfetti();
       }, 400); // Duration of page turn effect
     } else {
-      setIsFullSize(false);
       setTimeout(() => {
         if (audioRef.current) {
           audioRef.current.pause();
@@ -49,7 +46,7 @@ const LoveLetter = () => {
           setIsOpen(false);
         }
       }, 800);
-      setMessageIndex(0);
+      setPageIndex(0);
       setShowConfetti(false);
     }
   };
@@ -62,11 +59,16 @@ const LoveLetter = () => {
   };
 
   return (
-    <div className={`invitation-card ${isOpen ? 'open' : ''} ${isTurningPage ? 'page-turn' : ''}`} onClick={handleOpenLetter}>
+    <div className="book" onClick={handleOpenBook}>
       {showConfetti && <Confetti numberOfPieces={300} recycle={false} />}
-      <div className="header">Wedding Invitation</div>
-      <div className="body">
-        {messages[messageIndex]}
+      <div className={`cover ${isOpen ? 'open' : ''}`}>
+        <div className="pages">
+          {messages.map((message, index) => (
+            <div key={index} className="page" style={{transform: `rotateX(${index * -90}deg)`}}>
+              {message}
+            </div>
+          ))}
+        </div>
       </div>
       <audio ref={audioRef} src={audioFile} onError={(e) => console.error('Audio error:', e.message)} />
     </div>
