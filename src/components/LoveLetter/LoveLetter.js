@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import Confetti from 'react-confetti';
 import './LoveLetter.css';
-import audioFile from './wedding.mp3'; // Replace with appropriate wedding music
+import audioFile from './kushi.mp3'; // Replace with appropriate wedding music
 
 const LoveLetter = () => {
   const [isOpen, setIsOpen] = useState(false);
