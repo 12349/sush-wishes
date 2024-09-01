@@ -4,8 +4,8 @@ import './LoveLetter.css';
 import audioFile from './kushi.mp3'; // Updated to kushi.mp3
 
 const LoveLetter = () => {
+  const [currentPage, setCurrentPage] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
-  const [pageIndex, setPageIndex] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
   const audioRef = useRef(null);
 
@@ -20,7 +20,7 @@ const LoveLetter = () => {
 
   const totalMessages = messages.length;
 
-  const handleOpenBook = () => {
+  const handleCarouselClick = () => {
     if (!isOpen) {
       setIsOpen(true);
       setTimeout(() => {
@@ -30,9 +30,11 @@ const LoveLetter = () => {
             .catch(e => console.error("Playback failed:", e));
         }
       }, 800);
-    } else if (pageIndex < totalMessages - 1) {
-      setPageIndex(prevIndex => prevIndex + 1);
-      triggerConfetti();
+    } else if (currentPage < totalMessages - 1) {
+      setCurrentPage(prevPage => {
+        triggerConfetti();
+        return prevPage + 1;
+      });
     } else {
       setTimeout(() => {
         if (audioRef.current) {
@@ -41,7 +43,7 @@ const LoveLetter = () => {
           setIsOpen(false);
         }
       }, 800);
-      setPageIndex(0);
+      setCurrentPage(0);
       setShowConfetti(false);
     }
   };
@@ -54,16 +56,14 @@ const LoveLetter = () => {
   };
 
   return (
-    <div className="book" onClick={handleOpenBook}>
+    <div className="carousel" onClick={handleCarouselClick}>
       {showConfetti && <Confetti numberOfPieces={300} recycle={false} />}
-      <div className={`cover ${isOpen ? 'open' : ''}`}>
-        <div className={`pages ${isOpen ? 'open' : ''}`}>
-          {messages.map((message, index) => (
-            <div key={index} className="page" style={{ transform: `rotateX(${index * -90}deg)` }}>
-              {message}
-            </div>
-          ))}
-        </div>
+      <div className={`carousel-inner ${isOpen ? 'rotate' : ''}`}>
+        {messages.map((message, index) => (
+          <div key={index} className="page" style={{ transform: `rotateY(${index * -90}deg)` }}>
+            {message}
+          </div>
+        ))}
       </div>
       <audio ref={audioRef} src={audioFile} onError={(e) => console.error('Audio error:', e.message)} />
     </div>

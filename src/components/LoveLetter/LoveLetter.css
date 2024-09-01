@@ -9,47 +9,30 @@ body {
     align-items: center;
     height: 100vh;
     overflow: hidden;
-    position: relative;
 }
 
-.book {
+.carousel {
     position: relative;
     width: 80vw; /* Adjust as needed */
     max-width: 800px;
     height: 60vh; /* Adjust as needed */
     max-height: 600px;
-    perspective: 1000px; /* 3D perspective for page turn effect */
+    perspective: 1500px; /* 3D perspective for carousel effect */
 }
 
-.book .cover {
-    width: 100%;
-    height: 100%;
-    background: #fff; /* White cover */
-    border: 2px solid #d1c4e9;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+.carousel-inner {
     position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.8s ease-in-out;
-}
-
-.book.open .cover {
-    transform: rotateX(0deg);
-}
-
-.book .pages {
-    position: absolute;
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
-    transition: transform 0.8s ease-in-out;
+    transition: transform 1s ease-in-out;
 }
 
-.book .pages.open {
-    transform: rotateX(-180deg);
+.carousel-inner.rotate {
+    transform: rotateY(-90deg); /* Adjust rotation for page flip effect */
 }
 
-.book .page {
+.carousel-inner .page {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -57,59 +40,41 @@ body {
     border: 2px solid #d1c4e9;
     border-radius: 15px;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-    backface-visibility: hidden;
     text-align: center;
     padding: 20px;
     font-size: 1.2rem;
     line-height: 1.5;
-    transform-origin: top;
-    transform: rotateX(90deg);
-    transition: transform 0.8s ease-in-out;
+    backface-visibility: hidden;
+    transform-origin: center;
+    transition: transform 1s ease-in-out;
 }
 
-.book .page:nth-child(1) {
-    transform: rotateX(0deg);
+.carousel-inner .page:nth-child(1) {
+    transform: rotateY(0deg) translateZ(300px); /* Adjust Z index for carousel effect */
 }
 
-.book .page:nth-child(2) {
-    transform: rotateX(-90deg);
+.carousel-inner .page:nth-child(2) {
+    transform: rotateY(-90deg) translateZ(300px);
 }
 
-.book .page:nth-child(3) {
-    transform: rotateX(-180deg);
+.carousel-inner .page:nth-child(3) {
+    transform: rotateY(-180deg) translateZ(300px);
 }
 
-/* Confetti effect */
-.book::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(255, 222, 222, 0.3), rgba(255, 165, 195, 0.2));
-    pointer-events: none;
-    animation: confetti 10s infinite ease-in-out;
-    z-index: -3;
-    top: 0;
-    left: 0;
-}
-
-/* Confetti animation */
-@keyframes confetti {
-    0% { background-position: 0% 0%; }
-    50% { background-position: 100% 100%; }
-    100% { background-position: 0% 0%; }
+.carousel-inner .page:nth-child(4) {
+    transform: rotateY(-270deg) translateZ(300px);
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
-    .book {
+    .carousel {
         width: 90vw;
         height: 70vh;
     }
 }
 
 @media (max-width: 480px) {
-    .book {
+    .carousel {
         width: 95vw;
         height: 80vh;
     }
