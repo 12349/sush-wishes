@@ -1,13 +1,14 @@
 import React, { useState, useRef } from 'react';
 import Confetti from 'react-confetti';
 import './LoveLetter.css';
-import audioFile from './kushi.mp3'; // Replace with appropriate wedding music
+import audioFile from './wedding.mp3'; // Replace with appropriate wedding music
 
 const LoveLetter = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isFullSize, setIsFullSize] = useState(false);
   const [messageIndex, setMessageIndex] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [isTurningPage, setIsTurningPage] = useState(false);
   const audioRef = useRef(null);
 
   const messages = [
@@ -33,8 +34,12 @@ const LoveLetter = () => {
         }
       }, 800);
     } else if (messageIndex < totalMessages - 1) {
-      setMessageIndex(prevIndex => prevIndex + 1);
-      triggerConfetti();
+      setIsTurningPage(true);
+      setTimeout(() => {
+        setMessageIndex(prevIndex => prevIndex + 1);
+        setIsTurningPage(false);
+        triggerConfetti();
+      }, 400); // Duration of page turn effect
     } else {
       setIsFullSize(false);
       setTimeout(() => {
@@ -57,7 +62,7 @@ const LoveLetter = () => {
   };
 
   return (
-    <div className={`invitation-card ${isOpen ? 'open' : ''}`} onClick={handleOpenLetter}>
+    <div className={`invitation-card ${isOpen ? 'open' : ''} ${isTurningPage ? 'page-turn' : ''}`} onClick={handleOpenLetter}>
       {showConfetti && <Confetti numberOfPieces={300} recycle={false} />}
       <div className="header">Wedding Invitation</div>
       <div className="body">
