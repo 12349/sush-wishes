@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/sush-wishes/static/css/main.73803d52.css",
-    "main.js": "/sush-wishes/static/js/main.3a85d455.js",
+    "main.css": "/sush-wishes/static/css/main.94e255e5.css",
+    "main.js": "/sush-wishes/static/js/main.443a65c4.js",
     "static/js/453.c597153d.chunk.js": "/sush-wishes/static/js/453.c597153d.chunk.js",
     "static/media/kushi.mp3": "/sush-wishes/static/media/kushi.9523fac108157b542e33.mp3",
     "index.html": "/sush-wishes/index.html",
-    "main.73803d52.css.map": "/sush-wishes/static/css/main.73803d52.css.map",
-    "main.3a85d455.js.map": "/sush-wishes/static/js/main.3a85d455.js.map",
+    "main.94e255e5.css.map": "/sush-wishes/static/css/main.94e255e5.css.map",
+    "main.443a65c4.js.map": "/sush-wishes/static/js/main.443a65c4.js.map",
     "453.c597153d.chunk.js.map": "/sush-wishes/static/js/453.c597153d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.73803d52.css",
-    "static/js/main.3a85d455.js"
+    "static/css/main.94e255e5.css",
+    "static/js/main.443a65c4.js"
   ]
 }
