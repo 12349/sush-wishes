@@ -7,7 +7,6 @@ const LoveLetter = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
-  const [isTurningPage, setIsTurningPage] = useState(false);
   const audioRef = useRef(null);
 
   const messages = [
@@ -32,12 +31,8 @@ const LoveLetter = () => {
         }
       }, 800);
     } else if (pageIndex < totalMessages - 1) {
-      setIsTurningPage(true);
-      setTimeout(() => {
-        setPageIndex(prevIndex => prevIndex + 1);
-        setIsTurningPage(false);
-        triggerConfetti();
-      }, 400); // Duration of page turn effect
+      setPageIndex(prevIndex => prevIndex + 1);
+      triggerConfetti();
     } else {
       setTimeout(() => {
         if (audioRef.current) {
@@ -62,9 +57,9 @@ const LoveLetter = () => {
     <div className="book" onClick={handleOpenBook}>
       {showConfetti && <Confetti numberOfPieces={300} recycle={false} />}
       <div className={`cover ${isOpen ? 'open' : ''}`}>
-        <div className="pages">
+        <div className={`pages ${isOpen ? 'open' : ''}`}>
           {messages.map((message, index) => (
-            <div key={index} className="page" style={{transform: `rotateX(${index * -90}deg)`}}>
+            <div key={index} className="page" style={{ transform: `rotateX(${index * -90}deg)` }}>
               {message}
             </div>
           ))}

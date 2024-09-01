@@ -1,11 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Sedan:ital@0;1&family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background: #f9f9f9; /* Light background for invitation card */
+    background: #f9f9f9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,20 +14,20 @@ body {
 
 .book {
     position: relative;
-    width: 80vw; /* Adjust for book size */
+    width: 80vw; /* Adjust as needed */
     max-width: 800px;
-    height: 60vh; /* Adjust for book size */
+    height: 60vh; /* Adjust as needed */
     max-height: 600px;
-    perspective: 1000px; /* 3D perspective for page turn */
+    perspective: 1000px; /* 3D perspective for page turn effect */
 }
 
 .book .cover {
     width: 100%;
     height: 100%;
     background: #fff; /* White cover */
-    border: 2px solid #d1c4e9; /* Elegant border */
-    border-radius: 15px; /* Rounded corners */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Shadow for 3D effect */
+    border: 2px solid #d1c4e9;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     position: relative;
     transform-style: preserve-3d;
     transition: transform 0.8s ease-in-out;
@@ -37,10 +35,6 @@ body {
 
 .book.open .cover {
     transform: rotateX(0deg);
-}
-
-.book.open .pages {
-    transform: rotateX(-180deg);
 }
 
 .book .pages {
@@ -51,12 +45,16 @@ body {
     transition: transform 0.8s ease-in-out;
 }
 
+.book .pages.open {
+    transform: rotateX(-180deg);
+}
+
 .book .page {
     position: absolute;
     width: 100%;
     height: 100%;
     background: #fff;
-    border: 2px solid #d1c4e9; /* Elegant border */
+    border: 2px solid #d1c4e9;
     border-radius: 15px;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
     backface-visibility: hidden;
@@ -64,6 +62,9 @@ body {
     padding: 20px;
     font-size: 1.2rem;
     line-height: 1.5;
+    transform-origin: top;
+    transform: rotateX(90deg);
+    transition: transform 0.8s ease-in-out;
 }
 
 .book .page:nth-child(1) {
